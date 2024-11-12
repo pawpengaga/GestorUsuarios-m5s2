@@ -8,6 +8,11 @@
 </head>
 <body>
 	<h1>Bienvenido</h1>
+	<br />
+    <ul>
+        <li><a href="/GestorUsuarios/userServlet?accion=listar">Listar usuarios</a></li>
+        <li><a href="addUser.jsp">Agregar usuarios</a></li>
+    </ul>
 	
 </body>
 </html>
