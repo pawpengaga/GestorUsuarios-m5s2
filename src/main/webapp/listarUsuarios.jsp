@@ -21,6 +21,7 @@
                 <th>Pais</th>
                 <th>Detalle</th>
             </tr>
+            <!-- Status es un objeto que tiene muchos atributos, uno de estos atributos es index -->
             <c:forEach var="usuario" items="${usuarios}" varStatus="status">
                 <tr>
                     <td><c:out value="${usuario.nombre}" /></td>
