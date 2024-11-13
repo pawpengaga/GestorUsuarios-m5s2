@@ -35,9 +35,13 @@ public class RoleServlet extends HttpServlet {
 		// Usamos el mismo esquema de definir acciones
 		String accion = request.getParameter("accion");
 		if(accion.equals("listar")){
-
+			// Aqui creamos el set de roles para mandarlo al jsp
+			// La lista de roles mandada por medio de esto es lo que mandamos al jsp para que lo itere con JSTL
+			request.setAttribute("roles", roles);
+			request.getRequestDispatcher("listarRole.jsp").forward(request, response);
 		} else {
-
+			// Sino mandamos la redireccion sin manipular nada de la request
+			request.getRequestDispatcher("addRole.jsp").forward(request, response);
 		}
 
 	}
@@ -50,7 +54,7 @@ public class RoleServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		roles.add(new Role(nombre));
 
-		
+
 
 	}
 
