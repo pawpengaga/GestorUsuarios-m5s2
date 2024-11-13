@@ -53,8 +53,7 @@ public class RoleServlet extends HttpServlet {
 
 		String nombre = request.getParameter("nombre");
 		roles.add(new Role(nombre));
-
-
+		response.sendRedirect("/GestorUsuarios/RoleServlet?accion=listar");
 
 	}
 
