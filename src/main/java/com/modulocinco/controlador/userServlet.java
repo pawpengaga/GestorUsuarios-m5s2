@@ -36,6 +36,13 @@ public class userServlet extends HttpServlet {
 		if(accion.equals("listar")){
 			request.setAttribute("usuarios", usuarios);
 			request.getRequestDispatcher("listarUsuarios.jsp").forward(request, response);
+		} else if (accion.equals("detalle")) {
+
+			int indice = Integer.parseInt(request.getParameter("indice"));
+			Usuario user = usuarios.get(indice);
+			request.setAttribute("usuario", user);
+			request.getRequestDispatcher("detalleUsuario.jsp").forward(request, response);
+
 		} else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}

@@ -26,7 +26,7 @@
                     <td><c:out value="${usuario.nombre}" /></td>
                     <td><c:out value="${usuario.edad}" /></td>
                     <td><c:out value="${usuario.pais}" /></td>
-                    <!-- Ultimo campo dejado para despues -->
+                    <td><a href="/GestorUsuarios/userServlet?accion=detalle&indice=${status.index}">Ver detalle</a></td>
                 </tr>
             </c:forEach>
         </table>
