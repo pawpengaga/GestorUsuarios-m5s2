@@ -58,4 +58,8 @@ public class RoleServlet extends HttpServlet {
 
 	}
 
+	public List<Role> getRoles(){
+		return roles;
+	}
+
 }

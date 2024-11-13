@@ -5,11 +5,13 @@ public class Usuario {
   private String nombre;
   private int edad;
   private String pais;
+  private Role role;
 
-  public Usuario(String nombre, int edad, String pais) {
+  public Usuario(String nombre, int edad, String pais, Role role) {
     this.nombre = nombre;
     this.edad = edad;
     this.pais = pais;
+    this.role = role;
   }
 
   public String getNombre() {
@@ -36,13 +38,12 @@ public class Usuario {
     this.pais = pais;
   }
 
-  @Override
-  public String toString() {
-    return "{" +
-      " nombre='" + getNombre() + "'" +
-      ", edad='" + getEdad() + "'" +
-      ", pais='" + getPais() + "'" +
-      " }";
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
   }
 
 

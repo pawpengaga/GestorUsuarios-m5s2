@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.modulocinco.modelo.Role;
 import com.modulocinco.modelo.Usuario;
 
 import jakarta.servlet.ServletException;
@@ -20,6 +21,7 @@ public class userServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private List<Usuario> usuarios = new ArrayList<>();
+	private RoleServlet roleServlet = new RoleServlet();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,6 +45,9 @@ public class userServlet extends HttpServlet {
 			request.setAttribute("usuario", user);
 			request.getRequestDispatcher("detalleUsuario.jsp").forward(request, response);
 
+		} else if (accion.equals("add")) {
+			request.setAttribute("roles", roleServlet.getRoles());
+			request.getRequestDispatcher("addUser.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
@@ -57,8 +62,11 @@ public class userServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		int edad = Integer.parseInt(request.getParameter("edad"));
 		String pais = request.getParameter("pais");
+		String roleName = request.getParameter("role");
 
-		usuarios.add(new Usuario(nombre, edad, pais));
+		Role role = roleServlet.getRoles().stream().filter(r -> r.getNombre().equals(roleName)).findFirst().orElse(null);
+
+		usuarios.add(new Usuario(nombre, edad, pais, role));
 		response.sendRedirect("/GestorUsuarios/userServlet?accion=listar");
 
 	}
