@@ -45,7 +45,15 @@ public class userServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
+		// Ahora hacemos nuestro metodo POST
+		String nombre = request.getParameter("nombre");
+		int edad = Integer.parseInt(request.getParameter("edad"));
+		String pais = request.getParameter("pais");
+
+		usuarios.add(new Usuario(nombre, edad, pais));
+		response.sendRedirect("/GestorUsuarios/userServlet?accion=listar");
+
 	}
 
 }

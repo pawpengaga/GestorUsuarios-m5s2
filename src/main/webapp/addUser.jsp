@@ -9,7 +9,7 @@
 <body>
     <h2>Agrega usuarios</h2>
     <br />
-    <form action="GestorUsuarios/userServlet" method="POST">
+    <form action="/GestorUsuarios/userServlet" method="POST">
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" required /> <br />
         <label for="edad">Edad:</label>
