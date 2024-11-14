@@ -17,11 +17,6 @@
         <input type="number" id="edad" name="edad" required /> <br />
         <label for="pais">Pais</label>
         <input type="text" name="pais" id="pais" required /> <br />
-        
-        <c:forEach var="role" items="${xroles}">
-		    <p>${role.nombre}</p>
-		</c:forEach>
-
         <label for="role">Rol</label>
         <c:if test="${empty xroles}">
             <input type="text" name="role" id="role" value="Usuario" /> <br />
