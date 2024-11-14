@@ -29,7 +29,7 @@
     <!-- </c:if> -->
 	<br />
     <ul>
-        <li><a href="addRole.jsp">Agregar Rol</a></li>
+        <li><a href="/GestorUsuarios/RoleServlet?accion=add">Agregar Rol</a></li>
         <li><a href="/GestorUsuarios/userServlet?accion=listar">Listar usuarios</a></li>
         <li><a href="/GestorUsuarios/userServlet?accion=add">Agregar usuarios</a></li>
         <li><a href="logout.jsp">Cerrar Sesión</a></li>
