@@ -21,7 +21,7 @@ public class userServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private List<Usuario> usuarios = new ArrayList<>();
-	private RoleServlet roleServlet = new RoleServlet();
+	// private RoleServlet roleServlet = new RoleServlet();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,7 +46,10 @@ public class userServlet extends HttpServlet {
 			request.getRequestDispatcher("detalleUsuario.jsp").forward(request, response);
 
 		} else if (accion.equals("add")) {
-			request.setAttribute("roles", roleServlet.getRoles());
+			List<Role> listado = (List<Role>) getServletContext().getAttribute("roles");
+			System.out.println(listado);
+
+			request.setAttribute("roles", listado);
 			request.getRequestDispatcher("addUser.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -64,7 +67,9 @@ public class userServlet extends HttpServlet {
 		String pais = request.getParameter("pais");
 		String roleName = request.getParameter("role");
 
-		Role role = roleServlet.getRoles().stream().filter(r -> r.getNombre().equals(roleName)).findFirst().orElse(null);
+		List<Role> listado = (List<Role>) getServletContext().getAttribute("roles");
+
+		Role role = listado.stream().filter(r -> r.getNombre().equals(roleName)).findFirst().orElse(null);
 
 		usuarios.add(new Usuario(nombre, edad, pais, role));
 		response.sendRedirect("/GestorUsuarios/userServlet?accion=listar");

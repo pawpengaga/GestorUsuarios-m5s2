@@ -17,13 +17,23 @@
         <input type="number" id="edad" name="edad" required /> <br />
         <label for="pais">Pais</label>
         <input type="text" name="pais" id="pais" required /> <br />
+        
+        <c:forEach var="role" items="${roles}">
+		    <p>${role.nombre}</p>
+		</c:forEach>
 
         <label for="role">Rol</label>
-        <select name="role" id="role">
-            <c:forEach var="rol" items="roles">
-                <option value="${rol.nombre}"><c:out value="${rol.nombre}" /></option>
-            </c:forEach>
-        </select>
+        <c:if test="${empty roles}">
+            <input type="text" name="role" id="role" value="Usuario" /> <br />
+        </c:if>
+        <c:if test="${not empty roles}">
+            <select name="role" id="role">
+                <c:forEach var="rol" items="roles">
+                    <option value="${rol.nombre}"><c:out value="${rol.nombre}" /></option>
+                </c:forEach>
+            </select>
+        </c:if>
+
         <button type="submit">Agregar usuario</button>
     </form>
 </body>
