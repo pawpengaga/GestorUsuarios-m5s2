@@ -49,7 +49,7 @@ public class userServlet extends HttpServlet {
 			List<Role> listado = (List<Role>) getServletContext().getAttribute("roles");
 			System.out.println(listado);
 
-			request.setAttribute("roles", listado);
+			request.setAttribute("xroles", listado);
 			request.getRequestDispatcher("addUser.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);

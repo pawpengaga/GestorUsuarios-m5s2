@@ -33,6 +33,8 @@ public class RoleServlet extends HttpServlet {
 			super.init();
 			if (getServletContext().getAttribute("roles") == null) {
 				getServletContext().setAttribute("roles", new ArrayList<>());
+			} else {
+				System.out.println((List<Role>) getServletContext().getAttribute("roles"));
 			}
 		}
 
@@ -61,7 +63,7 @@ public class RoleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String nombre = request.getParameter("nombre");
-		
+
 		List<Role> roles = (List<Role>) getServletContext().getAttribute("roles");
 
 		roles.add(new Role(nombre));

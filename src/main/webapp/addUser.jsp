@@ -18,17 +18,17 @@
         <label for="pais">Pais</label>
         <input type="text" name="pais" id="pais" required /> <br />
         
-        <c:forEach var="role" items="${roles}">
+        <c:forEach var="role" items="${xroles}">
 		    <p>${role.nombre}</p>
 		</c:forEach>
 
         <label for="role">Rol</label>
-        <c:if test="${empty roles}">
+        <c:if test="${empty xroles}">
             <input type="text" name="role" id="role" value="Usuario" /> <br />
         </c:if>
-        <c:if test="${not empty roles}">
+        <c:if test="${not empty xroles}">
             <select name="role" id="role">
-                <c:forEach var="rol" items="roles">
+                <c:forEach var="rol" items="${xroles}">
                     <option value="${rol.nombre}"><c:out value="${rol.nombre}" /></option>
                 </c:forEach>
             </select>
