@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class userServlet
@@ -34,6 +35,13 @@ public class userServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("usuario") == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+
 		String accion = request.getParameter("accion");
 		if(accion.equals("listar")){
 			request.setAttribute("usuarios", usuarios);

@@ -9,13 +9,13 @@
 </head>
 <body>
     <h2>Inicio de sesion</h2>
-    <form action="">
+    <form action="/GestorUsuarios/AuthServlet" method="POST">
         <label for="usuario">Usuario</label><br>
         <input type="text" name="usuario" id="usuario" required />
         <label for="clave">Clave</label><br>
         <input type="text" name="clave" id="clave" required />
         <br>
-        <button type="button">Iniciar sesion</button>
+        <button type="submit">Iniciar sesion</button>
     </form>
     <c:if test="${param.error == 'invalid'}">
         <p style="color: red;">Usuario o contraseña incorrecta...</p>

@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,14 @@ public class RoleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("usuario") == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		} else {
+			System.out.println("Valor sesion" + session.getAttribute("usuario").toString());
+		}
 
 		// Usamos el mismo esquema de definir acciones
 		String accion = request.getParameter("accion");
