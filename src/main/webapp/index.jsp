@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Gestor Usuarios</title>
+    <meta charset="UTF-8">
+    <title>Gestor Usuarios</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<h1>Bienvenido</h1>
