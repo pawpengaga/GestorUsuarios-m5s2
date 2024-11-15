@@ -17,7 +17,8 @@
     <c:if test="${not empty roles}">
         <ul>
             <c:forEach var="role" items="${roles}">
-                <li><c:out value="${role.nombre}" /></li>
+                <!-- Ahora que traemos el objeto desde la base de datos de forma personalizada, no hace falta usar sintaxis de punto, los datos son los que son -->
+                <li><c:out value="${role}" /></li>
             </c:forEach>
         </ul>
     </c:if>

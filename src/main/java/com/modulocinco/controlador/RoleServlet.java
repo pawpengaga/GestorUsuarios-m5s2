@@ -24,6 +24,11 @@ public class RoleServlet extends HttpServlet {
 
 	private RoleDAO roleDAO = new RoleDAO();
 
+	public RoleServlet(){
+		// Hemos vuelto a un constructor normal
+		super();
+	}
+
 	//private List<Role> roles;
        
     /**
@@ -34,15 +39,15 @@ public class RoleServlet extends HttpServlet {
 		// 		roles = new ArrayList<>();
     // }
 		// VAMOS A CAMBIAR UN CONSTRUCTOR POR UN INICIALIZADOR
-		public void init() throws ServletException {
-			// Cuando generamos algo a nivel de contexto, se convierte en una variable global a todo el sistema
-			super.init();
-			if (getServletContext().getAttribute("roles") == null) {
-				getServletContext().setAttribute("roles", new ArrayList<>());
-			} else {
-				System.out.println((List<Role>) getServletContext().getAttribute("roles"));
-			}
-		}
+		// public void init() throws ServletException {
+		// 	// Cuando generamos algo a nivel de contexto, se convierte en una variable global a todo el sistema
+		// 	super.init();
+		// 	if (getServletContext().getAttribute("roles") == null) {
+		// 		getServletContext().setAttribute("roles", new ArrayList<>());
+		// 	} else {
+		// 		System.out.println((List<Role>) getServletContext().getAttribute("roles"));
+		// 	}
+		// }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,18 +63,26 @@ public class RoleServlet extends HttpServlet {
 		} else {
 			System.out.println("Valor sesion" + session.getAttribute("usuario").toString());
 		}
-
-		// Usamos el mismo esquema de definir acciones
 		String accion = request.getParameter("accion");
+
 		if(accion.equals("listar")){
-			// Aqui creamos el set de roles para mandarlo al jsp
-			// La lista de roles mandada por medio de esto es lo que mandamos al jsp para que lo itere con JSTL
-			// request.setAttribute("roles", roles);
-			request.getRequestDispatcher("listarRole.jsp").forward(request, response);
-		} else {
-			// Sino mandamos la redireccion sin manipular nada de la request
+		try {
+			List<String> roles = roleDAO.getRoles();
+			// Usamos el mismo esquema de definir acciones
+				request.setAttribute("roles", roles);
+				// Aqui creamos el set de roles para mandarlo al jsp
+				// La lista de roles mandada por medio de esto es lo que mandamos al jsp para que lo itere con JSTL
+				// request.setAttribute("roles", roles);
+				request.getRequestDispatcher("listarRole.jsp").forward(request, response);
+			} catch (Exception e){
+				
+			}
+		} else if ("add".equals(accion)) {
 			request.getRequestDispatcher("addRole.jsp").forward(request, response);
+		} {
+			// Sino mandamos la redireccion sin manipular nada de la request
 		}
+
 
 	}
 

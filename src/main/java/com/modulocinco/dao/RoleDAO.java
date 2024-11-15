@@ -11,26 +11,59 @@ import com.modulocinco.conf.DatabaseConnection;
 
 public class RoleDAO {
 
-  public List<String> getRoles() throws SQLException{
+  // VERSION ANOTADA HECHA POR MI (temporalmente retirada)
+
+  // public List<String> getRoles() throws SQLException{
     
+  //   List<String> roles = new ArrayList<>();
+  //   // Cuando las consultas son muy complejas, primero se prueban en el motor
+  //   String query = "SELEC nombre FROM roles WHERE estado != false"; // Traemos todos los estados diferentes de falso
+
+  //   Connection conn = null;
+  //   PreparedStatement stmt = null;
+
+  //   try{
+  //     Connection conn = DatabaseConnection.getConnection();
+  //       PreparedStatement stmt = conn.prepareStatement(query); // Se le ejectuta el query al statement
+  //       // rs el conjunto resultado de la consulta, trae varias filas
+  //       ResultSet rs = stmt.executeQuery();
+  //         // Mientras que tenga un siguiente, se añaden los datos a la lista
+  //         while (rs.next()) {
+  //           // Se traen los resultados de la columna nombre y se convierten a String
+  //           roles.add(rs.getString("nombre"));
+  //         }
+  //   }
+  //   // Se retorna la lista con nombres obtenidos a la manera de Java
+  //   return roles;
+
+  // }
+
+  // VERSION SIN ANOTACIONES HECHA POR EL PROFESOR
+  
+  public List<String> getRoles() throws SQLException {
     List<String> roles = new ArrayList<>();
-    // Cuando las consultas son muy complejas, primero se prueban en el motor
-    String query = "SELEC nombre FROM roles WHERE estado != false"; // Traemos todos los estados diferentes de falso
+    String query = "SELECT nombre FROM roles WHERE estado != false";
+    Connection conn = null;
+    PreparedStatement stmt = null;
 
-    try (Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(query); // Se le ejectuta el query al statement
-        // rs el conjunto resultado de la consulta, trae varias filas
-        ResultSet rs = stmt.executeQuery()){
-          // Mientras que tenga un siguiente, se añaden los datos a la lista
-          while (rs.next()) {
-            // Se traen los resultados de la columna nombre y se convierten a String
+    try {
+        conn = DatabaseConnection.getConnection();
+        if (conn == null) {
+            throw new SQLException("No se pudo establecer la conexión con la base de datos");
+        }
+        stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
             roles.add(rs.getString("nombre"));
-          }
+        }
+        System.out.println("Listo Roles con éxito");
+    } finally {
+        System.out.println("Listo Roles con éxito");
     }
-    // Se retorna la lista con nombres obtenidos a la manera de Java
-    return roles;
 
-  }
+    return roles;
+}
 
   public void addRole(String roleName) throws SQLException {
     // Aqui tenemos la query
