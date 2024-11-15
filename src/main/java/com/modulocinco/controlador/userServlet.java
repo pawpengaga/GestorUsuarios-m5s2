@@ -37,6 +37,8 @@ public class userServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
+		// Si la sesion del usuario es nula, se manda al login
+		// Antes de cualquier accion
 		if (session == null || session.getAttribute("usuario") == null) {
 			response.sendRedirect("login.jsp");
 			return;
