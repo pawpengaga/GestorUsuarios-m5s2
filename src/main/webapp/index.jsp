@@ -22,24 +22,28 @@
     <title>Gestor Usuarios</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-	<h1>Bienvenido, <c:out value="${usuario}" default="INVITADO" /></h1>
-    <%
-    // HttpSession session = request.getSession(false); // La s extra fue quitada...
-    if (session.getAttribute("usuario") != null) { %>
-        <p><a href="logout.jsp">Cerrar Sesión</a></p>
-    <% } %>
-	<br />
-    <ul>
-        <li><a href="/GestorUsuarios/RoleServlet?accion=add">Agregar Rol</a></li>
-        <li><a href="/GestorUsuarios/userServlet?accion=listar">Listar usuarios</a></li>
-        <li><a href="/GestorUsuarios/userServlet?accion=add">Agregar usuarios</a></li>
+<body id="index">
+	<div>
+        <h1>Bienvenido, <c:out value="${usuario}" default="INVITADO" /></h1>
+            <%
+            // HttpSession session = request.getSession(false); // La s extra fue quitada...
+            if (session.getAttribute("usuario") == null) { %>
+                <ul>
+                    <li><a href="logout.jsp">Iniciar sesión</a></li>
+                </ul>
+            <% } %>
+        <br />
         <% if (session.getAttribute("usuario") != null) { %>
-       		<li><a href="logout.jsp">Cerrar Sesión</a></li>
-    	<% } %>
-        <!-- <li><a href="logout.jsp">Cerrar Sesión</a></li> -->
-        <!-- <c:out value="${usuario}" default="INVITADO" /> -->
-    </ul>
+            <ul>
+                <li><a href="/GestorUsuarios/RoleServlet?accion=add">Agregar Rol</a></li>
+                <li><a href="/GestorUsuarios/userServlet?accion=listar">Listar usuarios</a></li>
+                <li><a href="/GestorUsuarios/userServlet?accion=add">Agregar usuarios</a></li>
+                <li><a href="logout.jsp">Cerrar Sesión</a></li>
+                    <!-- <li><a href="logout.jsp">Cerrar Sesión</a></li> -->
+                    <!-- <c:out value="${usuario}" default="INVITADO" /> -->
+            </ul>
+        <% } %>
+    </div>
 	
 </body>
 </html>
