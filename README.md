@@ -6,4 +6,7 @@
 
 ### Dia 3 del proyecto
 
-- La validacion en los otros 2 servlet no esta funcionando...
+- La validacion de usuarios ahora esta en todos los casos
+
+#### PARA REFERENCIA FUTURA DE MANEJO DE CRUD...
+![alt text](image.png)
