@@ -8,9 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.modulocinco.dao.RoleDAO;
 import com.modulocinco.modelo.Role;
 
 /**
@@ -19,6 +21,8 @@ import com.modulocinco.modelo.Role;
 @WebServlet("/RoleServlet")
 public class RoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private RoleDAO roleDAO = new RoleDAO();
 
 	//private List<Role> roles;
        
@@ -76,12 +80,20 @@ public class RoleServlet extends HttpServlet {
 
 		String nombre = request.getParameter("nombre");
 
-		List<Role> roles = (List<Role>) getServletContext().getAttribute("roles");
+		try {
+			roleDAO.addRole(nombre);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 
-		roles.add(new Role(nombre));
+		// Codigo que ya no necesitamos por la DATABASE UPDATE
 
-		getServletContext().setAttribute("roles", roles);
-		response.sendRedirect("/GestorUsuarios/RoleServlet?accion=listar");
+		// List<Role> roles = (List<Role>) getServletContext().getAttribute("roles");
+
+		// roles.add(new Role(nombre));
+
+		// getServletContext().setAttribute("roles", roles);
+		// response.sendRedirect("/GestorUsuarios/RoleServlet?accion=listar");
 
 	}
 
