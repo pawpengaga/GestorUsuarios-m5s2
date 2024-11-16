@@ -15,7 +15,9 @@ public class DatabaseConnection {
     try {
       // Esto es para forzar la conexion entre comillas no lo
       Class.forName("org.postgresql.Driver");
-      cnx = DriverManager.getConnection(URL, USER, PASSWORD);
+      // cnx = DriverManager.getConnection(URL, USER, PASSWORD);
+      cnx = DriverManager.getConnection("jdbc:postgresql:db_pruebas?user=postgres&password=12345678");
+
       System.out.println("Cargo el driver...");
 
       if (cnx != null) {
@@ -35,6 +37,10 @@ public class DatabaseConnection {
       new DatabaseConnection();
     }
     return cnx;
+  }
+
+  public static void main(String[] args) {
+	 DatabaseConnection.getConnection();
   }
 
 

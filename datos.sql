@@ -1,5 +1,7 @@
 CREATE DATABASE db_pruebas;
 
+----------------------------------------------
+
 CREATE TABLE public.roles
 (
     "idRol" serial NOT NULL,
@@ -10,6 +12,8 @@ CREATE TABLE public.roles
 
 ALTER TABLE IF EXISTS public.roles
     OWNER to postgres;
+    
+----------------------------------------------
 
 CREATE TABLE public.usuarios
 (

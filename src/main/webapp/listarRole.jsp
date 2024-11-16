@@ -10,7 +10,6 @@
 <body>
 
     <h2>Lista de roles</h2>
-    <br />
     <c:if test="${empty roles}">
         <p>No hay roles registrados...</p>
     </c:if>

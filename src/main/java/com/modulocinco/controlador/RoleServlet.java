@@ -67,15 +67,15 @@ public class RoleServlet extends HttpServlet {
 
 		if(accion.equals("listar")){
 		try {
-			List<String> roles = roleDAO.getRoles();
-			// Usamos el mismo esquema de definir acciones
+				List<String> roles = roleDAO.getRoles();
+				// Usamos el mismo esquema de definir acciones
 				request.setAttribute("roles", roles);
 				// Aqui creamos el set de roles para mandarlo al jsp
 				// La lista de roles mandada por medio de esto es lo que mandamos al jsp para que lo itere con JSTL
 				// request.setAttribute("roles", roles);
 				request.getRequestDispatcher("listarRole.jsp").forward(request, response);
 			} catch (Exception e){
-				
+				throw new ServletException("Error al obtener roles ",e);
 			}
 		} else if ("add".equals(accion)) {
 			request.getRequestDispatcher("addRole.jsp").forward(request, response);
@@ -98,6 +98,7 @@ public class RoleServlet extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		response.sendRedirect("/GestorUsuarios/RoleServlet?accion=listar");
 
 		// Codigo que ya no necesitamos por la DATABASE UPDATE
 

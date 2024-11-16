@@ -39,31 +39,28 @@ public class RoleDAO {
   // }
 
   // VERSION SIN ANOTACIONES HECHA POR EL PROFESOR
-  
-  public List<String> getRoles() throws SQLException {
-    List<String> roles = new ArrayList<>();
-    String query = "SELECT nombre FROM roles WHERE estado != false";
-    Connection conn = null;
-    PreparedStatement stmt = null;
 
-    try {
-        conn = DatabaseConnection.getConnection();
-        if (conn == null) {
-            throw new SQLException("No se pudo establecer la conexión con la base de datos");
+	public List<String> getRoles() throws SQLException {
+		List<String> roles = new ArrayList<>();
+		String query = "SELECT nombre FROM roles WHERE estado != false";
+		Connection conn = null;
+        PreparedStatement stmt = null;
+		try {
+			conn = DatabaseConnection.getConnection();
+			if(conn == null) {
+        		throw new SQLException("No se puedo establecer la conexión con la base de datos");
+        	}
+			stmt = conn.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				roles.add(rs.getString("nombre"));
+			}
+			System.out.println("Listo Roles con exito");
+		}finally {
+        	System.out.println("Listo Roles");
         }
-        stmt = conn.prepareStatement(query);
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            roles.add(rs.getString("nombre"));
-        }
-        System.out.println("Listo Roles con éxito");
-    } finally {
-        System.out.println("Listo Roles con éxito");
-    }
-
-    return roles;
-}
+		return roles;
+	}
 
   public void addRole(String roleName) throws SQLException {
     // Aqui tenemos la query
@@ -79,7 +76,7 @@ public class RoleDAO {
         conn = DatabaseConnection.getConnection();
 
         if (conn == null) {
-            throw new SQLException("No se pudo establecer la conexión con la base de datos");
+            throw new SQLException("No se pudo establecer la conexión con la base de datos para agregar");
         }
         // Todo esto ocurre si la conexion NO es nula, recien aqui se ejecuta la query
         stmt = conn.prepareStatement(query);
@@ -90,6 +87,8 @@ public class RoleDAO {
         // stmt.setBoolean(2, true);
         
         stmt.executeUpdate(); // Tambien se usa .executeQuery()
+    } catch (SQLException e) {
+      System.err.println("No se pudo conectar para agregar en el catch " + e.getMessage());
     } finally {
         System.out.println("Agregar Rol");
     }
@@ -105,6 +104,10 @@ public void deleteRole(int roleId) throws SQLException {
       stmt.setInt(1, roleId);
       stmt.executeUpdate();
   }
+}
+
+public void testConnection() throws SQLException{
+  DatabaseConnection.getConnection();
 }
 
 
