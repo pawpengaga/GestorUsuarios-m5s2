@@ -22,9 +22,9 @@ public class DatabaseConnection {
   // private static final String PASSWORD = 12345678;
 
   // 8. Se crea una conexión Nula para trabajarla dentro del metodo
-  // 8.1 eSTE 
   private static Connection cnx = null;
-
+  
+  // 8.1 Este metodo es PRIVADO, nunca lo vemos
   private DatabaseConnection(){
     try {
       // 9. Linea de codigo para forzar la conexación usando el .jar descargado
@@ -50,14 +50,18 @@ public class DatabaseConnection {
     }
   }
 
-  // E
+  // 9. Metodo PUBLICO para generar la conexión
+  // 9.1 Este es un metodo SINGLETON
   public static Connection getConnection(){
+    // Si la conexión es nula (Si no existe), genera una nueva conexion
     if (cnx == null) {
       new DatabaseConnection();
     }
+    // Si ya existe una conexion, hay que retornar la misma
     return cnx;
   }
 
+  // 10. Metodo main para probar la creación de una conexion al que NO HACER CASO
   public static void main(String[] args) {
 	 DatabaseConnection.getConnection();
   }
