@@ -92,24 +92,18 @@ public class RoleDAO {
     } finally {
         System.out.println("Agregar Rol");
     }
-}
-
-public void deleteRole(int roleId) throws SQLException {
-
-  // No cambia mucho para el metodo delete
-  String query = "DELETE FROM roles WHERE idRol = ?";
-  
-  try (Connection connection = DatabaseConnection.getConnection();
-       PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setInt(1, roleId);
-      stmt.executeUpdate();
   }
-}
 
-public void testConnection() throws SQLException{
-  DatabaseConnection.getConnection();
-}
+  public void deleteRole(int roleId) throws SQLException {
 
-
+    // No cambia mucho para el metodo delete
+    String query = "DELETE FROM roles WHERE idRol = ?";
+    
+    try (Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(query)) {
+        stmt.setInt(1, roleId);
+        stmt.executeUpdate();
+    }
+  }
 
 }

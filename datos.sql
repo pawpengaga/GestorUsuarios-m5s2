@@ -2,8 +2,7 @@ CREATE DATABASE db_pruebas;
 
 ----------------------------------------------
 
-CREATE TABLE public.roles
-(
+CREATE TABLE public.roles(
     "idRol" serial NOT NULL,
     nombre character varying(50),
     estado boolean DEFAULT 'true',
@@ -15,8 +14,7 @@ ALTER TABLE IF EXISTS public.roles
     
 ----------------------------------------------
 
-CREATE TABLE public.usuarios
-(
+CREATE TABLE public.usuarios(
     "idUser" serial NOT NULL,
     "idRol" integer,
     nombre character varying(100),
