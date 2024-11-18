@@ -9,8 +9,9 @@ public class Usuario {
   private int idRol;
   private boolean estado;
 
+  /* VAMOS A USAR SOBRECARGA DE METODOS */
 
-
+  // Para recuperar usuarios
   public Usuario(int idUser, String nombre, String correo, String clave, int idRol, boolean estado) {
     this.idUser = idUser;
     this.nombre = nombre;
@@ -18,6 +19,14 @@ public class Usuario {
     this.clave = clave;
     this.idRol = idRol;
     this.estado = estado;
+  }
+
+  // Para crear usuarios
+  public Usuario(String nombre, String correo, String clave, int idRol) {
+    this.nombre = nombre;
+    this.correo = correo;
+    this.clave = clave;
+    this.idRol = idRol;
   }
 
   public int getIdUser() {
