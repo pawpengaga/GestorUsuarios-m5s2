@@ -6,28 +6,14 @@ public class Usuario {
   private String nombre;
   private String correo;
   private String clave;
+  // Debido a que la relacion existe en las tablas, es mejor trabajar aqui con 2 atributos simples que con uno complejo
   private int idRol;
+  private String nombreRol;
   private boolean estado;
 
   /* VAMOS A USAR SOBRECARGA DE METODOS */
 
-  // Para recuperar usuarios
-  public Usuario(int idUser, String nombre, String correo, String clave, int idRol, boolean estado) {
-    this.idUser = idUser;
-    this.nombre = nombre;
-    this.correo = correo;
-    this.clave = clave;
-    this.idRol = idRol;
-    this.estado = estado;
-  }
-
-  // Para crear usuarios
-  public Usuario(String nombre, String correo, String clave, int idRol) {
-    this.nombre = nombre;
-    this.correo = correo;
-    this.clave = clave;
-    this.idRol = idRol;
-  }
+  
 
   public int getIdUser() {
     return this.idUser;
@@ -69,6 +55,14 @@ public class Usuario {
     this.idRol = idRol;
   }
 
+  public String getNombreRol() {
+    return this.nombreRol;
+  }
+
+  public void setNombreRol(String nombreRol) {
+    this.nombreRol = nombreRol;
+  }
+
   public boolean isEstado() {
     return this.estado;
   }
@@ -80,6 +74,7 @@ public class Usuario {
   public void setEstado(boolean estado) {
     this.estado = estado;
   }
+
 
 
 }

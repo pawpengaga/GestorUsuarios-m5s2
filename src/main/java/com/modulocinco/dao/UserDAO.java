@@ -19,8 +19,8 @@ public class UserDAO {
 
   public List<Usuario> getUsers(){
     List<Usuario> usuarios = new ArrayList<>();
-    // Se dice que el user es distinto de false por como funciona el preparedstatement
-    String consulta = "SELECT * FROM usuarios WHERE id_user != false";
+    // CORRECCION: Fue un error de tipeo, se refiere a la busqueda del estado
+    String consulta = "SELECT u.id_iser, u.nombre, u.correo, u.id_rol, r.nombre AS rol_nombre FROM usuarios u WHERE estado != false INNER JOIN roles r ON id.id_rol = r.id_rol";
     Connection conn = null;
     PreparedStatement stmt = null;
     // Statement stmt = null;
@@ -35,7 +35,13 @@ public class UserDAO {
 
       while (rs.next()) {
         // Llenamos nuestra lista con lo que leemos de la base de datos
-        usuarios.add(new Usuario(rs.getInt("id_user"), rs.getString("nombre"), rs.getString("correo"), rs.getString("clave"), rs.getInt("id_rol"), rs.getBoolean("estado")));
+        Usuario user = new Usuario();
+        user.setIdUser(rs.getInt("id_user"));
+        user.setNombre(rs.getString("nombre"));
+        user.setCorreo(rs.getString("correo"));
+        user.setIdRol(rs.getInt("id_rol"));
+        user.setNombreRol(rs.getString("rol_nombre"));
+        usuarios.add(user);
       }
       System.out.println("Usuarios listado con exito");
       // Cerramos el resourceSet
@@ -51,7 +57,7 @@ public class UserDAO {
 
   public Usuario getUser(int idUser) {
     Usuario user = null;
-    String sql = "SELECT * FROM usuarios WHERE id_user=" + idUser;
+    String consulta = "SELECT u.id_iser, u.nombre, u.correo, u.id_rol, r.nombre AS rol_nombre FROM usuarios u INNER JOIN roles r ON id.id_rol = r.id_rol WHERE estado != false AND u.id_user"+idUser;
     Connection conn = null;
 
     try {
@@ -61,10 +67,16 @@ public class UserDAO {
       }
 
       Statement stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery(sql);
+      ResultSet rs = stmt.executeQuery(consulta);
 
       if (rs.next()) {
-          user = new Usuario(rs.getInt("id_user"), rs.getString("nombre"), rs.getString("correo"), rs.getString("clave"), rs.getInt("id_rol"), rs.getBoolean("estado"));
+        user = new Usuario();
+        user.setIdUser(rs.getInt("id_user"));
+        user.setNombre(rs.getString("nombre"));
+        user.setCorreo(rs.getString("correo"));
+        user.setIdRol(rs.getInt("id_rol"));
+        user.setNombreRol(rs.getString("rol_nombre"));
+        user.setEstado(rs.getBoolean("estado"));
       }
 
       rs.close();
@@ -93,9 +105,9 @@ public class UserDAO {
       stmt.setInt(4, user.getIdRol());
 
       if (!stmt.execute()) {
-        System.out.println("Creado");
+        System.out.println("Usuario creado");
       } else {
-        System.out.println("diavlo|");
+        System.out.println("Usuario fallo al crearse");
       }
 
       stmt.close();
