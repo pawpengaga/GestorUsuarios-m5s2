@@ -16,6 +16,12 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
+  /*
+   * La conexion pertenece al modelo
+   * Trabajan la persistencia
+   * Cuando se menciona la persistencia hay una base de datos de por medio
+   */
+
   // 7. Las credenciales de acceso (Funciona mejor si la contraseña es un String)
   // private static final String URL = "jdbc:postgresql:/localhost:5432/db_pruebas";
   // private static final String USER = "postgres";

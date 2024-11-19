@@ -20,6 +20,11 @@ import com.modulocinco.modelo.Role;
  */
 @WebServlet("/RoleServlet")
 public class RoleServlet extends HttpServlet {
+
+	/*
+	 * Los servlet pertenecen al controlador
+	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private RoleDAO roleDAO = new RoleDAO();

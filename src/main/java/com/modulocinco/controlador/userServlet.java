@@ -1,9 +1,12 @@
 package com.modulocinco.controlador;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.modulocinco.dao.RoleDAO;
+import com.modulocinco.dao.UserDAO;
 import com.modulocinco.modelo.Role;
 import com.modulocinco.modelo.Usuario;
 
@@ -19,9 +22,17 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet("/userServlet")
 public class userServlet extends HttpServlet {
+
+	/*
+	 * Los servlet pertenecen al controlador
+	 */
+	
 	private static final long serialVersionUID = 1L;
 	
+
 	private List<Usuario> usuarios = new ArrayList<>();
+	private UserDAO userDAO = new UserDAO();
+	private RoleDAO roleDAO = new RoleDAO();
 	// private RoleServlet roleServlet = new RoleServlet();
        
     /**
@@ -45,9 +56,15 @@ public class userServlet extends HttpServlet {
 		}
 
 		String accion = request.getParameter("accion");
+
+		
+
 		if(accion.equals("listar")){
-			request.setAttribute("usuarios", usuarios);
-			request.getRequestDispatcher("listarUsuarios.jsp").forward(request, response);
+
+			try {
+
+			}
+
 		} else if (accion.equals("detalle")) {
 
 			int indice = Integer.parseInt(request.getParameter("indice"));
@@ -72,18 +89,87 @@ public class userServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Ahora hacemos nuestro metodo POST
-		String nombre = request.getParameter("nombre");
-		int edad = Integer.parseInt(request.getParameter("edad"));
-		String pais = request.getParameter("pais");
-		String roleName = request.getParameter("role");
+		// String nombre = request.getParameter("nombre");
+		// int edad = Integer.parseInt(request.getParameter("edad"));
+		// String pais = request.getParameter("pais");
+		// String roleName = request.getParameter("role");
 
-		List<Role> listado = (List<Role>) getServletContext().getAttribute("roles");
+		// List<Role> listado = (List<Role>) getServletContext().getAttribute("roles");
 
-		Role role = listado.stream().filter(r -> r.getNombre().equals(roleName)).findFirst().orElse(null);
+		// Role role = listado.stream().filter(r -> r.getNombre().equals(roleName)).findFirst().orElse(null);
 
-		usuarios.add(new Usuario(nombre, edad, pais, role));
+		// usuarios.add(new Usuario(nombre, edad, pais, role));
+		
+		/* PARTIMOS DE NUEVO */
+
+		String accion = request.getParameter("accion");
+		if (accion == null) {
+			addUser(request, response);
+		} else {
+			switch (accion) {
+				case "update" -> updateUser(request, response);
+				case "delete" -> deleteUser(request, response);
+				default -> listUsers(request, response);
+			}
+		}
+
 		response.sendRedirect("/GestorUsuarios/userServlet?accion=listar");
 
 	}
+
+	private void addUser(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+		String nombre = request.getParameter("nombre");
+		String correo = request.getParameter("correo");
+		String clave = request.getParameter("clave");
+		int idRol = Integer.parseInt(request.getParameter("idRol"));
+
+		Usuario newUser = new Usuario();
+		newUser.setNombre(nombre);
+		newUser.setCorreo(correo);
+		newUser.setClave(clave);
+		newUser.setIdRol(idRol);
+
+		userDAO.addUser(newUser);
+	}
+
+	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+		int idUser = Integer.parseInt(request.getParameter("idUser"));
+		String nombre = request.getParameter("nombre");
+		String correo = request.getParameter("correo");
+		String clave = request.getParameter("clave");
+		int idRol = Integer.parseInt(request.getParameter("idRol"));
+		boolean estado = Boolean.valueOf(request.getParameter("estado"));
+
+		Usuario newUser = new Usuario();
+		newUser.setNombre(nombre);
+		newUser.setCorreo(correo);
+		newUser.setClave(clave);
+		newUser.setIdRol(idRol);
+		newUser.setEstado(estado);
+		
+		userDAO.addUser(newUser);
+		response.sendRedirect("listarUsuarios.jsp");
+
+	}
+
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+		int idUser = Integer.parseInt(request.getParameter("idUser"));
+	
+		// Le pasamos el id al DAO
+		userDAO.eliminarUser(idUser);
+
+		response.sendRedirect("listarUsuarios.jsp");
+	}
+
+	private void listUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    List<Usuario> users = userDAO.getUsers();
+    List<Role> roles = roleDAO.getRoles();
+
+    request.setAttribute("users", users);
+    request.setAttribute("roles", roles);
+
+    request.getRequestDispatcher("listarUsuarios.jsp").forward(request, response);
+	}
+
 
 }

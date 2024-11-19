@@ -17,6 +17,11 @@ import com.modulocinco.modelo.Usuario;
 
 public class UserDAO {
 
+  /*
+   * Los DAO pertenecen al modelo
+   * Trabajan la linea de negocio y la persistencia
+   */
+
   public List<Usuario> getUsers(){
     List<Usuario> usuarios = new ArrayList<>();
     // CORRECCION: Fue un error de tipeo, se refiere a la busqueda del estado

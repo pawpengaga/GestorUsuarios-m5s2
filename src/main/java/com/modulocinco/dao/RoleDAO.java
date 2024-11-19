@@ -8,8 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.modulocinco.conf.DatabaseConnection;
+import com.modulocinco.modelo.Role;
 
 public class RoleDAO {
+
+  /*
+   * Los DAO pertenecen al modelo
+   * Trabajan la linea de negocio y la persistencia
+   */
 
   // VERSION ANOTADA HECHA POR MI (temporalmente retirada)
 
@@ -40,8 +46,8 @@ public class RoleDAO {
 
   // VERSION SIN ANOTACIONES HECHA POR EL PROFESOR
 
-	public List<String> getRoles() throws SQLException {
-		List<String> roles = new ArrayList<>();
+	public List<Role> getRoles() throws SQLException {
+		List<Role> roles = new ArrayList<>();
 		String query = "SELECT nombre FROM roles WHERE estado != false";
 		Connection conn = null;
         PreparedStatement stmt = null;

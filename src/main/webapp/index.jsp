@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body id="index">
+
+    <!-- 
+    - Todo lo que existe en webapp son las vistas
+    -->
+
 	<div>
         <h1>Bienvenido, <c:out value="${usuario}" default="INVITADO" /></h1>
             <%
