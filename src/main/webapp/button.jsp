@@ -1,0 +1,1 @@
+<button>Boton renderizado</button>

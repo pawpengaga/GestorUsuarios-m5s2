@@ -46,11 +46,16 @@ public class RoleDAO {
 
   // VERSION SIN ANOTACIONES HECHA POR EL PROFESOR
 
+  /*
+   * Statement se puede usar para SELECTS
+   * PreparedStatement se puede usar para DELETE, UPDATE, etc.
+   */
+
 	public List<Role> getRoles() throws SQLException {
 		List<Role> roles = new ArrayList<>();
 		String query = "SELECT nombre FROM roles WHERE estado != false";
 		Connection conn = null;
-        PreparedStatement stmt = null;
+    PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnection.getConnection();
 			if(conn == null) {

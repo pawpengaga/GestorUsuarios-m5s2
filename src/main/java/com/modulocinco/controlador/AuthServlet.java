@@ -37,6 +37,13 @@ public class AuthServlet extends HttpServlet {
 		// La clave va a ser 1234
 		if("admin".equals(usuario) && "1234".equals(clave)){
 			// Se crea la sesion y se establece el nombre de usuario (Aun sin atributos)
+
+			/*
+			 * 
+			 * Las sesiones son GLOBALES
+			 * Pueden ser accedidas desde cualquier vista
+			 * No requieren pasarse a la response
+			 */
 			HttpSession session = request.getSession();
 
 			// Se ponen los atributos a la session

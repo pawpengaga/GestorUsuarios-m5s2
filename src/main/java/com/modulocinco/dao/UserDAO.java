@@ -72,6 +72,8 @@ public class UserDAO {
       }
 
       Statement stmt = conn.createStatement();
+      
+      // ResultSet se usa para almacenar lo conseguido en sentencias SELECT
       ResultSet rs = stmt.executeQuery(consulta);
 
       if (rs.next()) {
@@ -109,6 +111,7 @@ public class UserDAO {
       stmt.setString(3, user.getClave());
       stmt.setInt(4, user.getIdRol());
 
+      // Devuelve true or false si la ejecucion fue exitosa
       if (!stmt.execute()) {
         System.out.println("Usuario creado");
       } else {
@@ -139,6 +142,12 @@ public class UserDAO {
       stmt.setInt(4, user.getIdRol());
       stmt.setBoolean(5, user.getEstado());
 
+      /*
+       * Devuelve un entero que corresponde al numero de filas/columnas afectadas
+       * (Ver como pgadmin y similares devuelven el valor)
+       * Si falla devolvera un 0 o un -1
+       * Se puede almacenar dentro de una variable
+       */
       if (stmt.executeUpdate() > 0) {
         System.out.println("Usuario actualizado con exito");
       } else {
