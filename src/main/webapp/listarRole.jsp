@@ -18,6 +18,7 @@
                     <th>Id rol</th>
                     <th>Nombre de rol</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                                 <td><c:out value="${myrole.id_rol}" /></td>
                                 <td><c:out value="${myrole.nombre}" /></td>
                                 <td><c:out value="${myrole.estado ? 'Activo' : 'Inactivo'}" /></td>
+                                <td><a class="btn btn-dark" href="/GestorUsuarios/RoleServlet?accion=edit&uid=${myrole.id_rol}">Editar</a></td>
                             </tr>
                         </c:forEach>
                 </c:if>

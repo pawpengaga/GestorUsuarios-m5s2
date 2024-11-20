@@ -40,6 +40,7 @@
                 <li><a href="/GestorUsuarios/RoleServlet?accion=add">Agregar Rol</a></li>
                 <li><a href="/GestorUsuarios/userServlet?accion=listar">Listar usuarios</a></li>
                 <li><a href="/GestorUsuarios/userServlet?accion=add">Agregar usuarios</a></li>
+                <li><a href="/GestorUsuarios/RoleServlet?accion=listar">Listar roles</a></li>
                 <li><a href="logout.jsp">Cerrar Sesion</a></li>
                     <!-- <li><a href="logout.jsp">Cerrar Sesión</a></li> -->
                     <!-- <c:out value="${usuario}" default="INVITADO" /> -->

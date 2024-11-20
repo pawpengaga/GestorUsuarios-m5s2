@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.modulocinco.dao.RoleDAO;
@@ -84,8 +83,11 @@ public class RoleServlet extends HttpServlet {
 			}
 		} else if ("add".equals(accion)) {
 			request.getRequestDispatcher("addRole.jsp").forward(request, response);
-		} {
-			// Sino mandamos la redireccion sin manipular nada de la request
+		} else if (accion.equals("edit")){
+			int idRol = Integer.parseInt(request.getParameter("uid"));
+			System.out.println(idRol);
+		} else {
+			request.getRequestDispatcher("listarRole.jsp").forward(request, response);
 		}
 
 
@@ -96,14 +98,23 @@ public class RoleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String accion = request.getParameter("accion");
 		String nombre = request.getParameter("nombre");
 
-		try {
-			roleDAO.addRole(nombre);
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+		if (accion.equals("add")) {
+			try {
+				roleDAO.addRole(nombre);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			response.sendRedirect("/GestorUsuarios/RoleServlet?accion=listar");
+		} if (accion.equals("edit")){
+			int idRol = Integer.parseInt(request.getParameter("uid"));
+			System.out.println(idRol);
+
+		} else {
+			System.out.println("ESTE SISTEMA FUNCIONA");
 		}
-		response.sendRedirect("/GestorUsuarios/RoleServlet?accion=listar");
 
 		// Codigo que ya no necesitamos por la DATABASE UPDATE
 

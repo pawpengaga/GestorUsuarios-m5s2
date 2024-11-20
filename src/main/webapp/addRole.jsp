@@ -8,7 +8,7 @@
 <body>
 
     <h2>Agrega un rol nuevo</h2>
-    <form action="/GestorUsuarios/RoleServlet" method="POST">
+    <form action="/GestorUsuarios/RoleServlet?accion=add" method="POST">
         <label for="nombre">Nombre de rol</label>
         <input type="text" id="nombre" name="nombre" required /> <br />
         <button type="submit">Agregar rol</button>
