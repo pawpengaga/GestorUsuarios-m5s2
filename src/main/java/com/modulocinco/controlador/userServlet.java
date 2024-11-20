@@ -62,7 +62,9 @@ public class userServlet extends HttpServlet {
 		if(accion.equals("listar")){
 
 			try {
-
+				listUsers(request, response);
+			} catch (SQLException e){
+				System.err.println(e.getMessage());
 			}
 
 		} else if (accion.equals("detalle")) {

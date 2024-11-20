@@ -62,7 +62,7 @@ public class UserDAO {
 
   public Usuario getUser(int idUser) {
     Usuario user = null;
-    String consulta = "SELECT u.id_iser, u.nombre, u.correo, u.id_rol, r.nombre AS rol_nombre FROM usuarios u INNER JOIN roles r ON id.id_rol = r.id_rol WHERE estado != false AND u.id_user"+idUser;
+    String consulta = "SELECT u.id_user, u.nombre, u.correo, u.\"idRol\", r.nombre AS rol_nombre FROM usuarios u INNER JOIN roles r ON u.id_rol = r.id_rol WHERE estado != false AND u.id_user = " + idUser;
     Connection conn = null;
 
     try {
