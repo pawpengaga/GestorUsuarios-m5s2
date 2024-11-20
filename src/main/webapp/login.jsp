@@ -3,10 +3,8 @@
     <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Inicio de sesion</title>
-</head>
+<!-- Vale por la etiqueta head -->
+<%@ include file="header.jsp" %>
 <body>
     <h2>Inicio de sesion</h2>
     <form action="/GestorUsuarios/AuthServlet" method="POST">

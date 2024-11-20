@@ -5,10 +5,8 @@
     <!-- <%@ taglib uri="jakarta.tags.core" prefix="c" %> -->
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Detalle de <c:out value="${usuario.nombre}" /></title>
-</head>
+<!-- Vale por la etiqueta head -->
+<%@ include file="header.jsp" %>
 <body>
 	<h2>Detalle del usuario</h2>
     <br />

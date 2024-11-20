@@ -72,9 +72,9 @@ public class RoleServlet extends HttpServlet {
 
 		if(accion.equals("listar")){
 		try {
-				List<String> roles = roleDAO.getRoles();
+				List<Role> rolesLista = roleDAO.getRoles();
 				// Usamos el mismo esquema de definir acciones
-				request.setAttribute("roles", roles);
+				request.setAttribute("rolesLista", rolesLista);
 				// Aqui creamos el set de roles para mandarlo al jsp
 				// La lista de roles mandada por medio de esto es lo que mandamos al jsp para que lo itere con JSTL
 				// request.setAttribute("roles", roles);

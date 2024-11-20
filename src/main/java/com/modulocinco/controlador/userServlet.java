@@ -104,12 +104,20 @@ public class userServlet extends HttpServlet {
 
 		String accion = request.getParameter("accion");
 		if (accion == null) {
-			addUser(request, response);
+			try {
+				addUser(request, response);
+			} catch (SQLException e){
+				System.err.println(e.getMessage());
+			}
 		} else {
-			switch (accion) {
-				case "update" -> updateUser(request, response);
-				case "delete" -> deleteUser(request, response);
-				default -> listUsers(request, response);
+			try {
+				switch (accion) {
+					case "update" -> updateUser(request, response);
+					case "delete" -> deleteUser(request, response);
+					default -> listUsers(request, response);
+				}
+			} catch (SQLException e){
+				System.err.println(e.getMessage());
 			}
 		}
 
@@ -162,13 +170,13 @@ public class userServlet extends HttpServlet {
 	}
 
 	private void listUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-    List<Usuario> users = userDAO.getUsers();
-    List<Role> roles = roleDAO.getRoles();
+		List<Usuario> users = userDAO.getUsers();
+		List<Role> roles = roleDAO.getRoles();
 
-    request.setAttribute("users", users);
-    request.setAttribute("roles", roles);
+		request.setAttribute("users", users);
+		request.setAttribute("roles", roles);
 
-    request.getRequestDispatcher("listarUsuarios.jsp").forward(request, response);
+		request.getRequestDispatcher("listarUsuarios.jsp").forward(request, response);
 	}
 
 

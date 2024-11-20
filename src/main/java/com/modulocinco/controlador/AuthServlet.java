@@ -45,26 +45,17 @@ public class AuthServlet extends HttpServlet {
 			 * No requieren pasarse a la response
 			 */
 			HttpSession session = request.getSession();
+			session.setAttribute("usuario", usuario); // Se ponen los atributos a la session			
+			
+			Cookie userCookie = new Cookie("usuario", usuario); // Se crea un cookie para guardar la sesion en la maquina en lugar de en la aplicacion Java. Las cookies funcionan por un sistema de clave valor
+			userCookie.setMaxAge(60*60); // Se le asigna un tiempo de vida a la sesion
 
-			// Se ponen los atributos a la session
-			session.setAttribute("usuario", usuario);
-
-			// Se crea un cookie para guardar la sesion en la maquina en lugar de en la aplicacion Java
-			// Las cookies funcionan por un sistema de clave valor
-			Cookie userCookie = new Cookie("usuario", usuario);
-
-			// Se le asigna un tiempo de vida a la sesion
-			userCookie.setMaxAge(60*60);
-
-			// Se envia junto con la respuesta
-			response.addCookie(userCookie);
-
-			// Se hace la redireccion
-			response.sendRedirect("index.jsp");
+			
+			response.addCookie(userCookie); // Se envia junto con la respuesta
+			response.sendRedirect("index.jsp"); // Se hace la redireccion
 
 		} else {
-			// Si los datos fueron incorrectos se redirecciona junto con un dato extra por medio de GET
-			response.sendRedirect("login.jsp?error=invalid");
+			response.sendRedirect("login.jsp?error=invalid"); // Si los datos fueron incorrectos se redirecciona junto con un dato extra por medio de GET
 		}
 	}
 

@@ -3,10 +3,8 @@
     <!-- <%@ taglib uri="jakarta.tags.core" prefix="c" %> -->
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Agregar roles</title>
-</head>
+<!-- Vale por la etiqueta head -->
+<%@ include file="header.jsp" %>
 <body>
 
     <h2>Agrega un rol nuevo</h2>

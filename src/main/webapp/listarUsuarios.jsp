@@ -5,30 +5,8 @@
     <!-- <%@ taglib uri="jakarta.tags.core" prefix="c" %> -->
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Listar Usuarios</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Font Awesome -->
-    <link 
-        rel="stylesheet"
-        type="text/css" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
-        integrity="sha512-KFkfwYDsLkINwp0p6FLnBZNdLGxuY9AAIQwvINkS4PhcL9sVcqvYVLDD9aWkXd13uQJoXtEKNosOwaZqXgeLog==" 
-        crossorigin="anonymous" 
-        referrerpolicy="no-referrer">
-
-    <!-- Bootstrap CSS -->
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-QWTkZ9jpPEjISv5IAkWRU9OFRe0R6YctnYmDr5pNYjTbZrjXHqJY6hHALEwIH" 
-        crossorigin="anonymous">
-
-    <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="assets/css/estilos.css">
-    </head>
+<!-- Vale por la etiqueta head -->
+<%@ include file="header.jsp" %>
 <body>
     <!-- Aqui vamos tener un ciclo con JSTL -->
     <br />

@@ -53,7 +53,7 @@ public class RoleDAO {
 
 	public List<Role> getRoles() throws SQLException {
 		List<Role> roles = new ArrayList<>();
-		String query = "SELECT nombre FROM roles WHERE estado != false";
+		String query = "SELECT \"idRol\", nombre, estado FROM roles WHERE estado != false";
 		Connection conn = null;
     PreparedStatement stmt = null;
 		try {
@@ -64,7 +64,7 @@ public class RoleDAO {
 			stmt = conn.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				roles.add(rs.getString("nombre"));
+				roles.add(new Role(rs.getInt("idRol"), rs.getString("nombre"), rs.getBoolean("estado")));
 			}
 			System.out.println("Listo Roles con exito");
 		}finally {

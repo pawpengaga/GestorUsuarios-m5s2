@@ -3,7 +3,7 @@ CREATE DATABASE db_pruebas;
 ----------------------------------------------
 
 CREATE TABLE public.roles(
-    "idRol" serial NOT NULL,
+    "idRol" serial NOT NULL, -- A partir de aqui "idRol" debe ser siempre referenciado con comillas para que postgres no aplane las mayusculas
     nombre character varying(50),
     estado boolean DEFAULT 'true',
     PRIMARY KEY ("idRol")
