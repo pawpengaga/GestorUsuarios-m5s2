@@ -8,10 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.crypto.Data;
-
-import org.apache.jasper.tagplugins.jstl.core.If;
-
 import com.modulocinco.conf.DatabaseConnection;
 import com.modulocinco.modelo.Usuario;
 
@@ -25,7 +21,7 @@ public class UserDAO {
   public List<Usuario> getUsers(){
     List<Usuario> usuarios = new ArrayList<>();
     // CORRECCION: Fue un error de tipeo, se refiere a la busqueda del estado
-    String consulta = "SELECT u.id_iser, u.nombre, u.correo, u.id_rol, r.nombre AS rol_nombre FROM usuarios u WHERE estado != false INNER JOIN roles r ON id.id_rol = r.id_rol";
+    String consulta = "SELECT u.\"idUser\", u.nombre, u.correo, u.\"idRol\", r.nombre AS rol_nombre FROM usuarios u INNER JOIN roles r ON u.\"idRol\" = r.\"idRol\" WHERE u.estado != false ORDER BY u.\"idUser\"";
     Connection conn = null;
     PreparedStatement stmt = null;
     // Statement stmt = null;
@@ -41,10 +37,10 @@ public class UserDAO {
       while (rs.next()) {
         // Llenamos nuestra lista con lo que leemos de la base de datos
         Usuario user = new Usuario();
-        user.setIdUser(rs.getInt("id_user"));
+        user.setIdUser(rs.getInt("idUser"));
         user.setNombre(rs.getString("nombre"));
         user.setCorreo(rs.getString("correo"));
-        user.setIdRol(rs.getInt("id_rol"));
+        user.setIdRol(rs.getInt("idRol"));
         user.setNombreRol(rs.getString("rol_nombre"));
         usuarios.add(user);
       }
@@ -95,7 +91,7 @@ public class UserDAO {
 }
 
   public void addUser(Usuario user) throws SQLException{
-    String sql = "INSERT INTO usuarios (nombre, correo, clave, id_rol) VALUES (?,?,?,?)";
+    String sql = "INSERT INTO usuarios (nombre, correo, clave, \"idRol\") VALUES (?,?,?,?)";
     Connection conn = null;
     PreparedStatement stmt = null;
     try {

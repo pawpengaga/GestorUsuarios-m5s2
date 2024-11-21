@@ -60,8 +60,8 @@ public class userServlet extends HttpServlet {
 		
 
 		if(accion.equals("listar")){
-
 			try {
+				System.out.println("LLego");
 				listUsers(request, response);
 			} catch (SQLException e){
 				System.err.println(e.getMessage());
@@ -75,11 +75,15 @@ public class userServlet extends HttpServlet {
 			request.getRequestDispatcher("detalleUsuario.jsp").forward(request, response);
 
 		} else if (accion.equals("add")) {
-			List<Role> listado = (List<Role>) getServletContext().getAttribute("roles");
-			System.out.println(listado);
-
-			request.setAttribute("xroles", listado);
-			request.getRequestDispatcher("addUser.jsp").forward(request, response);
+				try {
+					List<Role> listado = roleDAO.getRoles();
+					System.out.println(listado);
+		
+					request.setAttribute("xroles", listado);
+					request.getRequestDispatcher("addUser.jsp").forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		} else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
@@ -106,14 +110,11 @@ public class userServlet extends HttpServlet {
 
 		String accion = request.getParameter("accion");
 		if (accion == null) {
-			try {
-				addUser(request, response);
-			} catch (SQLException e){
-				System.err.println(e.getMessage());
-			}
+			response.sendRedirect("/GestorUsuarios/userServlet?accion=listar");
 		} else {
 			try {
 				switch (accion) {
+					case "add" -> addUser(request, response);
 					case "update" -> updateUser(request, response);
 					case "delete" -> deleteUser(request, response);
 					default -> listUsers(request, response);
@@ -123,11 +124,9 @@ public class userServlet extends HttpServlet {
 			}
 		}
 
-		response.sendRedirect("/GestorUsuarios/userServlet?accion=listar");
-
 	}
 
-	private void addUser(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+	private void addUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
 		String nombre = request.getParameter("nombre");
 		String correo = request.getParameter("correo");
 		String clave = request.getParameter("clave");
@@ -140,6 +139,7 @@ public class userServlet extends HttpServlet {
 		newUser.setIdRol(idRol);
 
 		userDAO.addUser(newUser);
+		response.sendRedirect("/GestorUsuarios/userServlet?accion=listar");
 	}
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
